@@ -3,380 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avinashi Vetri Marathon 2026</title>
+    <title>Avinashi Vetri Marathon 2026 | TVK</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Razorpay Checkout Script -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <style>
-        .tvk-red { background-color: #D32F2F; }
-        .tvk-yellow { background-color: #FFC107; }
-        .text-tvk-red { color: #D32F2F; }
-        .text-tvk-yellow { color: #E65100; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.92) 0%, rgba(15, 23, 42, 0.95) 55%, rgba(120, 53, 15, 0.90) 100%),
+                        url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="text-slate-100 antialiased selection:bg-yellow-400 selection:text-slate-900" x-data="marathonApp()">
 
-    <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="tvk-red text-white p-2 rounded-lg font-bold text-xl tracking-wider">TVK</div>
-                    <div>
-                        <span class="text-xs uppercase tracking-widest text-gray-500 block">Tamizhaga Vetri Kazhagam</span>
-                        <h1 class="text-lg font-bold text-tvk-red">Vetri Marathon 2026</h1>
-                    </div>
+    <!-- ================= TOP NAVBAR ================= -->
+    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-red-900/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo / Title -->
+            <div @click="switchTab('home')" class="flex items-center space-x-3 cursor-pointer">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-red-600 to-yellow-400 flex items-center justify-center text-slate-950 font-black text-lg shadow-md">
+                    VM
                 </div>
-                <div class="hidden md:flex space-x-6 items-center">
-                    <button onclick="showPage('homePage')" class="font-semibold text-gray-700 hover:text-red-600 transition">Home</button>
-                    <button onclick="showPage('locationPage')" class="font-semibold text-gray-700 hover:text-red-600 transition">Location</button>
-                    <button onclick="showPage('registrationPage')" class="tvk-red text-white px-5 py-2 rounded-full font-bold shadow hover:bg-red-700 transition">Register Now (₹200)</button>
-                </div>
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button onclick="toggleMobileMenu()" class="text-gray-700 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Dropdown -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 pt-2 pb-4 space-y-2">
-            <button onclick="showPage('homePage'); toggleMobileMenu();" class="block w-full text-left py-2 font-semibold text-gray-700">Home</button>
-            <button onclick="showPage('locationPage'); toggleMobileMenu();" class="block w-full text-left py-2 font-semibold text-gray-700">Location</button>
-            <button onclick="showPage('registrationPage'); toggleMobileMenu();" class="block w-full text-left py-2 font-semibold text-tvk-red">Register Now (₹200)</button>
-        </div>
-    </nav>
-
-    <!-- ==================== HOME PAGE ==================== -->
-    <div id="homePage" class="page-section">
-        <!-- Hero Section -->
-        <div class="bg-gradient-to-r from-red-600 to-orange-500 text-white py-16 px-4 text-center">
-            <div class="max-w-4xl mx-auto">
-                <p class="text-sm uppercase tracking-widest bg-yellow-400 text-black inline-block px-3 py-1 rounded-full font-bold mb-4">Organized by Avinashi North-West Union[span_0](start_span)[span_0](end_span)</p>
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-wide">Avinashi Vetri Marathon 2026[span_1](start_span)[span_1](end_span)</h1>
-                <p class="text-lg md:text-2xl italic mb-6 text-yellow-200">"A Drug-Free Tamilnadu • A Greener Tamilnadu[span_2](start_span)"[span_2](end_span)</p>
-                <div class="flex justify-center gap-4">
-                    <button onclick="showPage('registrationPage')" class="bg-yellow-400 text-gray-900 font-extrabold px-8 py-3 rounded-full shadow-lg text-lg hover:bg-yellow-300 transition transform hover:scale-105">
-                        <i class="fa-solid fa-running mr-2"></i> Register Now (₹200)
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Event Highlights & Cash Prize -->
-        <div class="max-w-6xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-600 text-center">
-                    <i class="fa-solid fa-calendar-days text-3xl text-tvk-red mb-3"></i>
-                    <h3 class="font-bold text-gray-600 text-sm">Date</h3>
-                    <p class="text-xl font-extrabold text-gray-900">November 29, 2026[span_3](start_span)[span_3](end_span)</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500 text-center">
-                    <i class="fa-solid fa-trophy text-3xl text-yellow-500 mb-3"></i>
-                    <h3 class="font-bold text-gray-600 text-sm">Total Cash Prize</h3>
-                    <p class="text-2xl font-extrabold text-tvk-red">₹1,00,000[span_4](start_span)[span_4](end_span)</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-600 text-center">
-                    <i class="fa-solid fa-location-dot text-3xl text-tvk-red mb-3"></i>
-                    <h3 class="font-bold text-gray-600 text-sm">Venue</h3>
-                    <p class="text-md font-extrabold text-gray-900">AKN School, Nathampalayam, By-pass, Avinashi[span_5](start_span)[span_5](end_span)</p>
-                </div>
-            </div>
-
-            <!-- Race Categories -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
-                <h2 class="text-2xl font-bold text-center text-gray-800 mb-8"><i class="fa-solid fa-medal text-yellow-500 mr-2"></i> Race Categories</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-                        <span class="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Kids</span>
-                        <h3 class="text-lg font-bold mt-3 text-gray-800">Below 9 Years[span_6](start_span)[span_6](end_span)</h3>
-                        <p class="text-2xl font-extrabold text-tvk-red mt-1">1.5 KM[span_7](start_span)[span_7](end_span)</p>
-                    </div>
-                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center">
-                        <span class="bg-yellow-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Kids</span>
-                        <h3 class="text-lg font-bold mt-3 text-gray-800">Below 12 Years[span_8](start_span)[span_8](end_span)</h3>
-                        <p class="text-2xl font-extrabold text-yellow-600 mt-1">3 KM[span_9](start_span)[span_9](end_span)</p>
-                    </div>
-                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-                        <span class="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Youth</span>
-                        <h3 class="text-lg font-bold mt-3 text-gray-800">Below 16 Years[span_10](start_span)[span_10](end_span)</h3>
-                        <p class="text-2xl font-extrabold text-tvk-red mt-1">4 KM[span_11](start_span)[span_11](end_span)</p>
-                    </div>
-                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center">
-                        <span class="bg-yellow-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Open</span>
-                        <h3 class="text-lg font-bold mt-3 text-gray-800">Above 16 Years[span_12](start_span)[span_12](end_span)</h3>
-                        <p class="text-2xl font-extrabold text-yellow-600 mt-1">10 KM[span_13](start_span)[span_13](end_span)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Perks Section -->
-            <div class="bg-gray-900 text-white rounded-2xl p-8 text-center">
-                <h3 class="text-xl font-bold mb-6">Participants Will Get[span_14](start_span)[span_14](end_span)</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-shirt text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">T-Shirt[span_15](start_span)[span_15](end_span)</p></div>
-                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-award text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">Medal[span_16](start_span)[span_16](end_span)</p></div>
-                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-file-lines text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">Certificate[span_17](start_span)[span_17](end_span)</p></div>
-                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-glass-water text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">Refreshments[span_18](start_span)[span_18](end_span)</p></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== LOCATION PAGE ==================== -->
-    <div id="locationPage" class="page-section hidden max-w-5xl mx-auto px-4 py-12">
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-            <h2 class="text-3xl font-bold text-center text-tvk-red mb-6"><i class="fa-solid fa-map-location-dot mr-2"></i> Event Location</h2>
-            <div class="bg-red-50 border-l-4 border-red-600 p-4 mb-6 rounded-r-lg">
-                <p class="font-bold text-gray-800 text-lg">AKN School, Nathampalayam, By-pass, Avinashi[span_19](start_span)[span_19](end_span)</p>
-                <p class="text-gray-600 text-sm mt-1">The marathon will start on November 29, 2026 at the scheduled time[span_20](start_span)[span_20](end_span).</p>
-            </div>
-            <!-- Google Maps Embed Placeholder -->
-            <div class="w-full h-96 bg-gray-200 rounded-xl overflow-hidden shadow-inner flex items-center justify-center">
-                <iframe class="w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.2891!2d77.27!3d11.20!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDEyJzAwLjAiTiA3N8KwMTYnMTIuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div class="mt-6 text-center">
-                <p class="font-semibold text-gray-700">Contact: 8675739507, 9790682415, 9597735733[span_21](start_span)[span_21](end_span)</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== REGISTRATION PAGE ==================== -->
-    <div id="registrationPage" class="page-section hidden max-w-3xl mx-auto px-4 py-12">
-        <div class="bg-white rounded-2xl shadow-xl p-8 border-t-8 border-red-600">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-extrabold text-gray-900">Marathon Registration Form</h2>
-                <p class="text-gray-600 text-sm mt-1">Fill in the details and complete the payment of ₹200[span_22](start_span)[span_22](end_span)</p>
-            </div>
-
-            <form id="marathonForm" onsubmit="handleRegistration(event)" class="space-y-6">
-                <!-- Name -->
                 <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Full Name *</label>
-                    <input type="text" id="fullName" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Enter your full name">
+                    <h1 class="font-extrabold text-sm sm:text-base tracking-wide text-white leading-none">AVINASHI VETRI MARATHON</h1>
+                    <span class="text-[11px] font-semibold text-yellow-400 tracking-widest">2026 EDITION</span>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                <button @click="switchTab('home')" :class="activeTab === 'home' ? 'text-yellow-400 border-b-2 border-yellow-400 pb-1' : 'text-slate-300 hover:text-white transition'">Home</button>
+                <button @click="switchTab('prizes')" :class="activeTab === 'prizes' ? 'text-yellow-400 border-b-2 border-yellow-400 pb-1' : 'text-slate-300 hover:text-white transition'">Cash Prizes</button>
+                <a href="https://maps.google.com/?q=AKN+School+Nathampalayam+By-pass+Avinashi" target="_blank" class="text-slate-300 hover:text-white transition">Location <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+                <button @click="switchTab('register')" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-5 py-2 rounded-lg font-bold shadow-md transition">
+                    Register Now
+                </button>
+            </nav>
+
+            <!-- Mobile Register Button -->
+            <div class="flex md:hidden items-center space-x-2">
+                <button @click="switchTab('home')" x-show="activeTab !== 'home'" class="text-xs bg-slate-800 px-3 py-2 rounded-lg font-semibold text-yellow-400">
+                    <i class="fa-solid fa-house"></i> Home
+                </button>
+                <button @click="switchTab('register')" x-show="activeTab !== 'register'" class="text-xs bg-red-600 px-3.5 py-2 rounded-lg font-bold text-white shadow">
+                    Register
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="min-h-screen">
+
+        <!-- ================= 1. HOME PAGE ================= -->
+        <div x-show="activeTab === 'home'" x-transition.opacity>
+            
+            <!-- HERO SECTION -->
+            <section class="hero-bg py-16 sm:py-24 px-4 text-center relative overflow-hidden border-b border-yellow-500/20">
+                <div class="max-w-4xl mx-auto space-y-6 relative z-10">
+                    
+                    <!-- Organizers & Supporters Header -->
+                    <div class="space-y-1.5">
+                        <p class="text-xs sm:text-sm font-bold uppercase tracking-widest text-yellow-400">
+                            Organized By
+                        </p>
+                        <h3 class="text-base sm:text-xl font-extrabold text-white tracking-wide">
+                            TAMILAGA VETTRI KAZHAGAM (TVK)
+                        </h3>
+                        <p class="text-sm sm:text-base font-semibold text-slate-200">
+                            Avinashi North-West Union (அவினாசி வடமேற்கு ஒன்றியம்)
+                        </p>
+                        <div class="pt-1">
+                            <span class="inline-block bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-medium px-4 py-1 rounded-full">
+                                <i class="fa-solid fa-leaf mr-1.5 text-emerald-400"></i> Supported by: <strong>Pasumai Ingarangal</strong>, Karuvalur, Avinashi
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Main Title -->
+                    <div class="pt-3">
+                        <h2 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-none text-white drop-shadow-lg">
+                            AVINASHI VETRI MARATHON <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500">2026</span>
+                        </h2>
+                        <p class="mt-4 text-base sm:text-xl font-semibold text-yellow-300 tracking-wide">
+                            "A Drug-Free Tamil Nadu • A Greener Tamil Nadu"
+                        </p>
+                    </div>
+
+                    <!-- Date & Venue Details -->
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 pt-2 text-sm sm:text-base font-semibold">
+                        <div class="glass-card px-5 py-3 rounded-xl flex items-center space-x-2.5 text-white">
+                            <i class="fa-solid fa-calendar-days text-yellow-400 text-lg"></i>
+                            <span><strong>DATE:</strong> 29 NOVEMBER 2026</span>
+                        </div>
+                        <div class="glass-card px-5 py-3 rounded-xl flex items-center space-x-2.5 text-white">
+                            <i class="fa-solid fa-location-dot text-red-400 text-lg"></i>
+                            <span><strong>VENUE:</strong> AKN School, Nathampalayam, By-pass, Avinashi</span>
+                        </div>
+                    </div>
+
+                    <!-- 3 Action Buttons -->
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
+                        <button @click="switchTab('register')" class="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold px-8 py-4 rounded-xl shadow-xl shadow-red-950/50 transition transform hover:-translate-y-0.5 text-base uppercase tracking-wider border border-red-400/30">
+                            <i class="fa-solid fa-person-running mr-2"></i> REGISTER NOW (₹200)
+                        </button>
+                        
+                        <button @click="switchTab('prizes')" class="w-full sm:w-auto bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl shadow-xl shadow-amber-950/50 transition transform hover:-translate-y-0.5 text-base uppercase tracking-wider">
+                            <i class="fa-solid fa-trophy mr-2"></i> CASH PRIZE DETAILS
+                        </button>
+                        
+                        <a href="https://maps.google.com/?q=AKN+School+Nathampalayam+By-pass+Avinashi" target="_blank" class="w-full sm:w-auto bg-slate-800/90 hover:bg-slate-700 text-white border border-slate-600 font-bold px-8 py-4 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 text-center uppercase tracking-wider">
+                            <i class="fa-solid fa-map-location-dot mr-2 text-yellow-400"></i> EVENT LOCATION
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT THE EVENT SECTION -->
+            <section class="py-16 px-4 max-w-5xl mx-auto">
+                <div class="bg-slate-900/90 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
+                    <div class="text-center max-w-3xl mx-auto space-y-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-red-500">Social Awareness Movement</span>
+                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">About The Event</h3>
+                        <div class="w-20 h-1.5 bg-gradient-to-r from-red-600 to-yellow-400 mx-auto rounded-full"></div>
+                        <p class="text-slate-300 leading-relaxed text-base sm:text-lg pt-3">
+                            <strong>Avinashi Vetri Marathon 2026</strong> is a flagship social awareness initiative organized by <strong>Tamilaga Vettri Kazhagam (TVK) - Avinashi North-West Union</strong>, in association with <strong>Pasumai Ingarangal</strong>.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base">
+                            Our core mission is to build a <strong>Drug-Free Tamil Nadu and a Greener Tamil Nadu</strong>. By bringing together students, youth, and fitness enthusiasts from all walks of life, this marathon aims to inspire healthy living, eradicate substance abuse, and promote environmental conservation for a brighter tomorrow.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PARTICIPANTS WILL GET SECTION -->
+            <section class="pb-20 px-4 max-w-6xl mx-auto">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Participants Will Get</h3>
+                    <p class="text-slate-400 text-sm mt-1">Every registered runner receives an official race kit & support</p>
                 </div>
 
-                <!-- Email & Mobile -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Email ID *</label>
-                        <input type="email" id="email" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="example@gmail.com">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                    <!-- T-Shirt -->
+                    <div class="bg-slate-900 border border-slate-800 hover:border-yellow-400/50 transition p-6 rounded-2xl text-center space-y-3 shadow-lg">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-shirt"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-base">Official T-Shirt</h4>
+                        <p class="text-xs text-slate-400">Premium breathable marathon jersey</p>
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Mobile / WhatsApp Number *</label>
-                        <input type="tel" id="mobile" pattern="[0-9]{10}" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="10-digit mobile number">
+
+                    <!-- Medal -->
+                    <div class="bg-slate-900 border border-slate-800 hover:border-yellow-400/50 transition p-6 rounded-2xl text-center space-y-3 shadow-lg">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-base">Finisher Medal</h4>
+                        <p class="text-xs text-slate-400">Commemorative 2026 event medal</p>
+                    </div>
+
+                    <!-- Certificate -->
+                    <div class="bg-slate-900 border border-slate-800 hover:border-yellow-400/50 transition p-6 rounded-2xl text-center space-y-3 shadow-lg">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-certificate"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-base">Certificate</h4>
+                        <p class="text-xs text-slate-400">Official participation certificate</p>
+                    </div>
+
+                    <!-- Refreshments -->
+                    <div class="bg-slate-900 border border-slate-800 hover:border-yellow-400/50 transition p-6 rounded-2xl text-center space-y-3 shadow-lg">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-bottle-water"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-base">Refreshments</h4>
+                        <p class="text-xs text-slate-400">Hydration points & healthy snacks</p>
+                    </div>
+
+                    <!-- Medical Kit -->
+                    <div class="col-span-2 sm:col-span-1 bg-slate-900 border border-slate-800 hover:border-yellow-400/50 transition p-6 rounded-2xl text-center space-y-3 shadow-lg">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-kit-medical"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-base">Medical Support</h4>
+                        <p class="text-xs text-slate-400">On-route first aid & medical kit</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= 2. CASH PRIZES PAGE ================= -->
+        <div x-show="activeTab === 'prizes'" x-cloak x-transition.opacity class="py-16 px-4 max-w-4xl mx-auto">
+            <div class="bg-slate-900 border border-yellow-500/30 rounded-3xl p-8 sm:p-12 text-center shadow-2xl space-y-6">
+                <div class="w-20 h-20 mx-auto rounded-full bg-yellow-400/10 border border-yellow-400/40 flex items-center justify-center text-4xl text-yellow-400">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                
+                <div class="space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-widest text-yellow-400">Grand Rewards</span>
+                    <h2 class="text-3xl sm:text-5xl font-black text-white">TOTAL CASH PRIZE</h2>
+                    <div class="text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 py-2">
+                        ₹1,00,000
                     </div>
                 </div>
 
-                <!-- DOB & Gender -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Date of Birth *</label>
-                        <input type="date" id="dob" required onchange="calculateCategory()" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 max-w-2xl mx-auto">
+                    <p class="text-base sm:text-lg font-semibold text-yellow-300">
+                        <i class="fa-solid fa-bullhorn mr-2"></i> Category-wise Prize Split-up Announcement
+                    </p>
+                    <p class="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
+                        The detailed category-wise cash prize distribution (1st, 2nd, and 3rd prizes across all age & gender categories) will be officially separated and announced very soon!
+                    </p>
+                </div>
+
+                <!-- Race Categories Overview -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-left">
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs text-yellow-400 font-bold">Below 9 Years</span>
+                        <p class="text-xl font-black text-white mt-1">1.5 KM</p>
                     </div>
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs text-yellow-400 font-bold">Below 12 Years</span>
+                        <p class="text-xl font-black text-white mt-1">3 KM</p>
+                    </div>
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs text-yellow-400 font-bold">Below 16 Years</span>
+                        <p class="text-xl font-black text-white mt-1">4 KM</p>
+                    </div>
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs text-yellow-400 font-bold">Above 16 Years</span>
+                        <p class="text-xl font-black text-white mt-1">10 KM</p>
+                    </div>
+                </div>
+
+                <div class="pt-6 flex flex-col sm:flex-row justify-center gap-4">
+                    <button @click="switchTab('register')" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition">
+                        Proceed to Register (₹200)
+                    </button>
+                    <button @click="switchTab('home')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-8 py-3.5 rounded-xl transition">
+                        Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 3. REGISTRATION PAGE ================= -->
+        <div x-show="activeTab === 'register'" x-cloak x-transition.opacity class="py-12 px-4 max-w-3xl mx-auto">
+            
+            <!-- Registration Form Card -->
+            <div x-show="!registrationSuccess" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+                <div class="border-b border-slate-800 pb-6 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Gender *</label>
-                        <select id="gender" required onchange="calculateCategory()" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
-                            <option value="">-- Select Gender --</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                        <span class="text-xs font-bold uppercase tracking-widest text-yellow-400">Online Registration</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Participant Details</h2>
+                    </div>
+                    <div class="bg-red-600/20 border border-red-500/40 px-4 py-2 rounded-xl text-right">
+                        <span class="text-xs text-red-300 block">Entry Fee (All Categories)</span>
+                        <span class="text-xl font-black text-white">₹200</span>
+                    </div>
+                </div>
+
+                <form @submit.prevent="initiatePayment" class="space-y-5">
+                    
+                    <!-- Full Name -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-300 mb-1.5">Full Name <span class="text-red-500">*</span></label>
+                        <input type="text" x-model="form.name" required placeholder="Enter participant's full name"
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                    </div>
+
+                    <!-- Date of Birth & Gender -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                         <label class="block text-sm font-semibold text-slate-300 mb-1.5">Date of Birth <span class="text-red-500">*</span></label>
+                            <input type="date" x-model="form.dob" @change="calculateAgeAndCategory()" required max="2023-11-29"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Gender <span class="text-red-500">*</span></label>
+                            <select x-model="form.gender" @change="calculateAgeAndCategory()" required
+                                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Auto-Calculated Age & Race Category Box -->
+                    <div class="bg-slate-950/90 border border-yellow-500/40 rounded-2xl p-4 sm:p-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <span class="text-xs font-semibold text-slate-400 block">Age as of 29 Nov 2026:</span>
+                                <span class="text-base font-bold text-white" x-text="calculatedAge !== null ? calculatedAge + ' Years' : 'Select Date of Birth'"></span>
+                            </div>
+                            <div class="sm:text-right">
+                                <span class="text-xs font-semibold text-yellow-400 block">Auto-Assigned Race Category:</span>
+                                <span class="text-lg font-black text-emerald-400" x-text="form.category || 'Waiting for DOB & Gender...'"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Number & Email -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-1.5">WhatsApp / Mobile Number <span class="text-red-500">*</span></label>
+                            <input type="tel" x-model="form.phone" required pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Email Address (For Receipt) <span class="text-red-500">*</span></label>
+                            <input type="email" x-model="form.email" required placeholder="example@gmail.com"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                        </div>
+                    </div>
+
+                    <!-- T-Shirt Size -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-300 mb-1.5">T-Shirt Size <span class="text-red-500">*</span></label>
+                        <select x-model="form.tshirt" required
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+                            <option value="">Select T-Shirt Size</option>
+                            <optgroup label="Kids Sizes (Inches)">
+                                <option value="24">Size 24 (Kids)</option>
+                                <option value="26">Size 26 (Kids)</option>
+                                <option value="28">Size 28 (Kids)</option>
+                                <option value="30">Size 30 (Kids)</option>
+                                <option value="32">Size 32 (Kids)</option>
+                                <option value="34">Size 34 (Kids)</option>
+                            </optgroup>
+                            <optgroup label="Adult Sizes">
+                                <option value="S">S (Small)</option>
+                                <option value="M">M (Medium)</option>
+                                <option value="L">L (Large)</option>
+                                <option value="XL">XL (Extra Large)</option>
+                                <option value="XXL">XXL (Double XL)</option>
+                                <option value="XXXL">XXXL (Triple XL)</option>
+                            </optgroup>
                         </select>
                     </div>
-                </div>
 
-                <!-- Auto-Calculated Category & Fee -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-red-50 p-4 rounded-xl border border-red-200">
+                    <!-- Address -->
                     <div>
-                        <label class="block text-xs font-bold text-red-700 uppercase">Auto Category</label>
-                        <input type="text" id="category" readonly class="w-full bg-transparent font-extrabold text-gray-800 text-lg border-none focus:outline-none mt-1" value="Select DOB & Gender">
+                        <label class="block text-sm font-semibold text-slate-300 mb-1.5">Full Address / City <span class="text-red-500">*</span></label>
+                        <textarea x-model="form.address" required rows="2" placeholder="Enter your address / town / district"
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400"></textarea>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-red-700 uppercase">Entry Fee</label>
-                        <input type="text" id="amount" readonly class="w-full bg-transparent font-extrabold text-tvk-red text-xl border-none focus:outline-none mt-1" value="₹200">
+
+                    <!-- Submit & Pay Button -->
+                    <div class="pt-3">
+                        <button type="submit" :disabled="isProcessing"
+                            class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 disabled:opacity-50 text-white font-extrabold py-4 rounded-xl shadow-xl transition text-lg uppercase tracking-wider flex items-center justify-center space-x-2">
+                            <span x-show="!isProcessing"><i class="fa-solid fa-lock mr-2"></i> Pay ₹200 & Complete Registration</span>
+                            <span x-show="isProcessing"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Processing Registration...</span>
+                        </button>
+                        <p class="text-center text-xs text-slate-400 mt-3">
+                            <i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> Secured by Razorpay. Automatic confirmation email & receipt will be sent after payment.
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ================= REGISTRATION SUCCESS SCREEN ================= -->
+            <div x-show="registrationSuccess" x-cloak class="bg-slate-900 border border-emerald-500/40 rounded-3xl p-8 sm:p-12 text-center shadow-2xl space-y-6">
+                <div class="w-20 h-20 mx-auto rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-4xl">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                
+                <div>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white">Registration Successful!</h2>
+                    <p class="text-slate-300 mt-2 text-sm sm:text-base">
+                        Thank you, <strong class="text-yellow-400" x-text="form.name"></strong>! Your payment of <strong>₹200</strong> is confirmed.
+                    </p>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 max-w-md mx-auto text-left space-y-3 text-sm">
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Registration ID:</span>
+                        <span class="font-black text-yellow-400 text-base" x-text="regId"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Payment ID:</span>
+                        <span class="font-mono text-emerald-400" x-text="paymentId"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Race Category:</span>
+                        <span class="font-bold text-white" x-text="form.category"></span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">T-Shirt Size:</span>
+                        <span class="font-bold text-white" x-text="form.tshirt"></span>
                     </div>
                 </div>
 
-                <!-- T-Shirt Size -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">T-Shirt Size *</label>
-                    <select id="tshirtSize" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
-                        <option value="">-- Select T-Shirt Size --</option>
-                        <option value="24">24</option>
-                        <option value="26">26</option>
-                        <option value="28">28</option>
-                        <option value="30">30</option>
-                        <option value="32">32</option>
-                        <option value="34">34</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                        <option value="XXXL">XXXL</option>
-                    </select>
+                <p class="text-xs text-slate-400">
+                    An official confirmation email and payment receipt have been sent to <strong class="text-white" x-text="form.email"></strong>.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-2">
+                    <button @click="window.print()" class="bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-bold px-6 py-3 rounded-xl transition">
+                        <i class="fa-solid fa-print mr-2"></i> Print / Save Receipt
+                    </button>
+                    <button @click="resetForm()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl transition">
+                        Register Another Participant
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- Address -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Address *</label>
-                    <textarea id="address" rows="3" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Enter your full address"></textarea>
+    </main>
+
+    <!-- ================= FOOTER & CONTACT DETAILS ================= -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12 px-4 text-slate-300">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Organizer Info -->
+            <div class="space-y-3">
+                <h4 class="text-lg font-extrabold text-white">AVINASHI VETRI MARATHON 2026</h4>
+                <p class="text-sm text-slate-400">
+                    Organized by: <strong class="text-yellow-400">Tamilaga Vettri Kazhagam (TVK) - Avinashi North-West Union</strong>
+                </p>
+                <p class="text-sm text-slate-400">
+                    Supported by: <strong class="text-emerald-400">Pasumai Ingarangal, Karuvalur, Avinashi</strong>
+                </p>
+            </div>
+
+            <!-- Venue Details -->
+            <div class="space-y-3">
+                <h4 class="text-base font-bold text-white uppercase tracking-wider">Event Venue & Date</h4>
+                <p class="text-sm text-slate-400">
+                    <i class="fa-solid fa-calendar text-yellow-400 mr-2"></i> Sunday, 29 November 2026
+                </p>
+                <p class="text-sm text-slate-400">
+                    <i class="fa-solid fa-location-dot text-red-500 mr-2"></i> AKN School, Nathampalayam, By-pass, Avinashi
+                </p>
+                <a href="https://maps.google.com/?q=AKN+School+Nathampalayam+By-pass+Avinashi" target="_blank" class="inline-block text-xs font-bold text-yellow-400 hover:underline pt-1">
+                    Open in Google Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="space-y-3">
+                <h4 class="text-base font-bold text-white uppercase tracking-wider">For Any Queries, Contact</h4>
+                <div class="space-y-2 text-sm">
+                    <p>
+                        <i class="fa-brands fa-whatsapp text-emerald-400 mr-2 text-base"></i>
+                        <a href="https://wa.me/918675739507" target="_blank" class="hover:text-white font-semibold">86757 39507</a> (WhatsApp / Call)
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-phone text-yellow-400 mr-2"></i>
+                        <a href="tel:+919790682415" class="hover:text-white font-semibold">97906 82415</a>
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-phone text-yellow-400 mr-2"></i>
+                        <a href="tel:+919597735733" class="hover:text-white font-semibold">95977 35733</a>
+                    </p>
                 </div>
-
-                <!-- Submit & Pay Button -->
-                <button type="submit" class="w-full tvk-red text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-red-700 transition transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-credit-card mr-2"></i> Pay ₹200 & Complete Registration
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-8 text-center shadow-2xl">
-            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                <i class="fa-solid fa-check"></i>
             </div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">Registration Successful!</h3>
-            <p class="text-gray-600 text-sm mb-4">Your marathon registration has been successfully completed.</p>
-            <div class="bg-gray-50 p-4 rounded-xl text-left mb-6 space-y-2 text-sm border">
-                <p><strong>Name:</strong> <span id="resName"></span></p>
-                <p><strong>Category:</strong> <span id="resCategory"></span></p>
-                <p><strong>Transaction ID:</strong> <span id="resTxnId"></span></p>
-            </div>
-            <button onclick="location.reload()" class="w-full bg-gray-900 text-white py-3 rounded-xl font-bold hover:bg-gray-800 transition">Go to Home Page</button>
-        </div>
-    </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-6 mt-12">
-        <p class="text-sm">© 2026 Avinashi Vetri Marathon | Tamizhaga Vetri Kazhagam[span_23](start_span)[span_23](end_span)</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto border-t border-slate-900 mt-10 pt-6 text-center text-xs text-slate-500">
+            <p>Thank you for supporting a Drug-Free & Greener Tamil Nadu. © 2026 Avinashi Vetri Marathon Organizing Committee.</p>
+        </div>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- ================= ALPINE.JS LOGIC ================= -->
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
-            document.getElementById(pageId).classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
+        function marathonApp() {
+            return {
+                activeTab: 'home',
+                isProcessing: false,
+                registrationSuccess: false,
+                regId: '',
+                paymentId: '',
+                calculatedAge: null,
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
+                // Configuration Keys
+                razorpayKey: 'rzp_live_U0jUvuUKBpqJ7r',
+                appsScriptUrl: 'https://script.google.com/macros/s/AKfycbx7QBvWyXedPcS1xXsWqizgnFS4QnGQ9yFnVDupbPMIEHNIq8toHlBX5L22oaQ60ORv/exec',
 
-        // Auto Calculate Age & Category based on Marathon Date: Nov 29, 2026
-        function calculateCategory() {
-            const dobVal = document.getElementById('dob').value;
-            const genderVal = document.getElementById('gender').value;
-            
-            if (!dobVal || !genderVal) {
-                document.getElementById('category').value = "Select DOB & Gender";
-                return;
-            }
+                form: {
+                    name: '',
+                    dob: '',
+                    gender: '',
+                    category: '',
+                    phone: '',
+                    email: '',
+                    tshirt: '',
+                    address: '',
+                    amount: 200
+                },
 
-            const dobDate = new Date(dobVal);
-            const marathonDate = new Date('2026-11-29'); // Marathon Date[span_24](start_span)[span_24](end_span)
-            
-            let age = marathonDate.getFullYear() - dobDate.getFullYear();
-            const m = marathonDate.getMonth() - dobDate.getMonth();
-            if (m < 0 || (m === 0 && marathonDate.getDate() < dobDate.getDate())) {
-                age--;
-            }
+                switchTab(tab) {
+                    this.activeTab = tab;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
 
-            let catText = "";
-            if (age < 9) {
-                catText = "Below 9 Years - 1.5 KM";
-            } else if (age < 12) {
-                catText = "Below 12 Years - 3 KM";
-            } else if (age < 16) {
-                catText = "Below 16 Years - 4 KM";
-            } else {
-                catText = "Above 16 Years - 10 KM";
-            }
+                // Calculate Exact Age as of 29 November 2026 and assign Category
+                calculateAgeAndCategory() {
+                    if (!this.form.dob) {
+                        this.calculatedAge = null;
+                        this.form.category = '';
+                        return;
+                    }
 
-            catText += ` (${genderVal})`;
-            document.getElementById('category').value = catText;
-        }
+                    const birthDate = new Date(this.form.dob);
+                    const eventDate = new Date('2026-11-29');
 
-        // Handle Registration & Razorpay Payment
-        function handleRegistration(event) {
-            event.preventDefault();
+                    let age = eventDate.getFullYear() - birthDate.getFullYear();
+                    const monthDiff = eventDate.getMonth() - birthDate.getMonth();
+                    if (monthDiff < 0 || (monthDiff === 0 && eventDate.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
 
-            const fullName = document.getElementById('fullName').value;
-            const email =document.getElementById('email').value;
-            const mobile = document.getElementById('mobile').value;
-            const dob = document.getElementById('dob').value;
-            const gender = document.getElementById('gender').value;
-            const category = document.getElementById('category').value;
-            const tshirtSize = document.getElementById('tshirtSize').value;
-            const address = document.getElementById('address').value;
-            const amount = 200;
+                    if (age < 3) {
+                        alert('Participant must be at least 3 years old as of 29 November 2026.');
+                        this.form.dob = '';
+                        this.calculatedAge = null;
+                        this.form.category = '';
+                        return;
+                    }
 
-            var options = {
-                "key": "rzp_live_U0jUvuUKBpqJ7r",
-                "amount": amount * 100, // Amount in paise
-                "currency": "INR",
-                "name": "Vetri Marathon 2026",
-                "description": "Registration Fee for " + category,
-                "handler": function (response){
-                    const paymentId = response.razorpay_payment_id;
+                    this.calculatedAge = age;
+                    const genderPrefix = this.form.gender ? ` (${this.form.gender})` : '';
 
-                    const payload = {
-                        name: fullName,
-                        phone: mobile,
-                        payment_id: paymentId,
-                        dob: dob,
-                        gender: gender,
-                        category: category,
-                        address: address,
-                        tshirt: tshirtSize,
-                        amount: amount,
-                        email: email
+                    if (age < 9) {
+                        this.form.category = `Below 9 Years - 1.5 KM${genderPrefix}`;
+                    } else if (age < 12) {
+                        this.form.category = `Below 12 Years - 3 KM${genderPrefix}`;
+                    } else if (age < 16) {
+                        this.form.category = `Below 16 Years - 4 KM${genderPrefix}`;
+                    } else {
+                        this.form.category = `Above 16 Years - 10 KM${genderPrefix}`;
+                    }
+                },
+
+                // Initiate Razorpay Payment
+                initiatePayment() {
+                    if (!this.form.category) {
+                        alert('Please select your Date of Birth and Gender to assign your race category.');
+                        return;
+                    }
+
+                    const self = this;
+                    const options = {
+                        key: this.razorpayKey,
+                        amount: this.form.amount * 100, // ₹200 in paise
+                        currency: 'INR',
+                        name: 'Avinashi Vetri Marathon 2026',
+                        description: 'Registration Fee - ' + this.form.category,
+                        prefill: {
+                            name: this.form.name,
+                            email: this.form.email,
+                            contact: this.form.phone
+                        },
+                        notes: {
+                            category: this.form.category,
+                            tshirt: this.form.tshirt,
+                            dob: this.form.dob
+                        },
+                        theme: {
+                            color: '#DC2626'
+                        },
+                        handler: function (response) {
+                            // Payment Successful -> Send Data to Google Apps Script
+                            self.submitToGoogleSheets(response.razorpay_payment_id);
+                        },
+                        modal: {
+                            ondismiss: function () {
+                                self.isProcessing = false;
+                            }
+                        }
                     };
 
-                    submitToGoogleSheets(payload);
+                    const rzp = new Razorpay(options);
+                    rzp.on('payment.failed', function (response) {
+                        alert('Payment Failed: ' + response.error.description);
+                        self.isProcessing = false;
+                    });
+                    rzp.open();
                 },
-                "prefill": {
-                    "name": fullName,
-                    "email": email,
-                    "contact": mobile
+
+                // Send Registration Data to Google Apps Script
+                async submitToGoogleSheets(razorpayPaymentId) {
+                    this.isProcessing = true;
+                    this.paymentId = razorpayPaymentId;
+
+                    const payload = {
+                        name: this.form.name,
+                        dob: this.form.dob,
+                        gender: this.form.gender,
+                        category: this.form.category,
+                        phone: this.form.phone,
+                        address: this.form.address,
+                        tshirt: this.form.tshirt,
+                        amount: this.form.amount,
+                        payment_id: razorpayPaymentId,
+                        email: this.form.email
+                    };
+
+                    try {
+                        const response = await fetch(this.appsScriptUrl, {
+                            method: 'POST',
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.status === 'success' || result.status === 'duplicate') {
+                            this.regId = result.regId || 'CONFIRMED';
+                            this.registrationSuccess = true;
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        } else {
+                            alert('Payment received (ID: ' + razorpayPaymentId + '), but sheet update had an issue: ' + result.message);
+                            this.regId = 'VERIFIED-PAY';
+                            this.registrationSuccess = true;
+                        }
+                    } catch (error) {
+                        // Fallback if CORS hides response body (Apps Script still executes POST)
+                        console.error('Submission note:', error);
+                        this.regId = 'VM-2026-PAID';
+                        this.registrationSuccess = true;
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } finally {
+                        this.isProcessing = false;
+                    }
                 },
-                "theme": {
-                    "color": "#D32F2F"
+
+                resetForm() {
+              this.form = {
+                        name: '',
+                        dob: '',
+                        gender: '',
+                        category: '',
+                        phone: '',
+                        email: '',
+                        tshirt: '',
+                        address: '',
+                        amount: 200
+                    };
+                    this.calculatedAge = null;
+                    this.registrationSuccess = false;
+                    this.regId = '';
+                    this.paymentId = '';
                 }
-            };
-            
-            var rzp = new Razorpay(options);
-            rzp.open();
-        }
-
-        // Send Data to Google Apps Script Endpoint
-        function submitToGoogleSheets(data) {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbx7QBvWyXedPcS1xXsWqizgnFS4QnGQ9yFnVDupbPMIEHNIq8toHlBX5L22oaQ60ORv/exec';
-
-            fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(() => {
-                document.getElementById('resName').innerText = data.name;
-                document.getElementById('resCategory').innerText = data.category;
-                document.getElementById('resTxnId').innerText = data.payment_id;
-                document.getElementById('successModal').classList.remove('hidden');
-            }).catch(error => {
-                console.error('Error!', error);
-                alert('An error occurred while saving the registration. Please contact via WhatsApp.');
-            });
+            }
         }
     </script>
 </body>
 </html>
+                      
