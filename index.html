@@ -1,5 +1,4 @@
-
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -248,10 +247,10 @@ footer strong {color:var(--lime)}
           <label for="category">Race Category *</label>
           <select id="category" name="category" required>
             <option value="">Select Category</option>
-            <option>Below 9 Years - 1.5 KM</option>
-            <option>Below 12 Years - 3 KM</option>
-            <option>Below 16 Years - 4 KM</option>
-            <option>Above 16 Years - 10 KM</option>
+            <option value="Below 9 Years - 1.5 KM">Below 9 Years - 1.5 KM</option>
+            <option value="Below 12 Years - 3 KM">Below 12 Years - 3 KM</option>
+            <option value="Below 16 Years - 4 KM">Below 16 Years - 4 KM</option>
+            <option value="Above 16 Years - 10 KM">Above 16 Years - 10 KM</option>
           </select>
         </div>
 
@@ -333,7 +332,7 @@ const messageBox = document.getElementById("message");
 
 function showMessage(message, success) {
   messageBox.style.display = "block";
-  messageBox.textContent = message;
+  messageBox.innerHTML = message;
   messageBox.style.background = success ? "#edf5e8" : "#fff0ed";
   messageBox.style.color = success ? "#17452f" : "#9b291c";
 }
@@ -352,17 +351,31 @@ function getFormData() {
   };
 }
 
+// Age Category Validation based on Event Date: 2026-11-29
+function validateAgeCategory(dobString, categoryString) {
+  const eventDate = new Date("2026-11-29");
+  const birthDate = new Date(dobString);
+  
+  let age = eventDate.getFullYear() - birthDate.getFullYear();
+  const m = eventDate.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && eventDate.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  if (categoryString.includes("Below 9") && age >= 9) return "Selected 'Below 9 Years' category, but the participant's age will be " + age + " on event day.";
+  if (categoryString.includes("Below 12") && age >= 12) return "Selected 'Below 12 Years' category, but the participant's age will be " + age + " on event day.";
+  if (categoryString.includes("Below 16") && age >= 16) return "Selected 'Below 16 Years' category, but the participant's age will be " + age + " on event day.";
+  if (categoryString.includes("Above 16") && age < 16) return "Selected 'Above 16 Years' category, but the participant's age will be " + age + " on event day.";
+  
+  return null; // Valid
+}
+
 function submitRegistration(data, paymentId) {
   const payload = {
     ...data,
     payment_id: paymentId
   };
 
-  /*
-   * Sends the JSON body to the existing Apps Script doPost.
-   * The existing Apps Script is responsible for generating
-   * the Registration ID, saving the Sheet row and sending email.
-   */
   return fetch(APPS_SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
@@ -385,9 +398,10 @@ form.addEventListener("submit", function(event) {
     return;
   }
 
-  if (!data.name || !data.dob || !data.gender ||
-      !data.category || !data.email || !data.address || !data.tshirt) {
-    showMessage("Please fill in all required fields.", false);
+  // Verify Age matches category
+  const ageError = validateAgeCategory(data.dob, data.category);
+  if (ageError) {
+    showMessage(ageError, false);
     return;
   }
 
@@ -400,7 +414,6 @@ form.addEventListener("submit", function(event) {
     currency: "INR",
     name: "Avinashi Vetri Marathon 2026",
     description: "Marathon Registration Fee",
-    image: "",
     prefill: {
       name: data.name,
       email: data.email,
@@ -416,23 +429,25 @@ form.addEventListener("submit", function(event) {
     },
     handler: async function(response) {
       showMessage(
-        "Payment successful. Submitting your registration details. Please wait...",
+        "Payment successful! Submitting your details to the database...",
         true
       );
 
       try {
         await submitRegistration(data, response.razorpay_payment_id);
 
+        // Display Payment ID clearly to user so they have proof
         showMessage(
-          "Payment completed. Your registration details have been submitted to the registration system. Please check your email for your Registration ID and confirmation. If you do not receive it, contact the event organizer.",
+          "✅ <b>Registration Successful!</b><br>" +
+          "Payment ID: <b>" + response.razorpay_payment_id + "</b><br>" +
+          "Your details have been recorded. Please check your email for confirmation. Keep this Payment ID safe for reference.",
           true
         );
 
         form.reset();
       } catch (error) {
         showMessage(
-          "Payment was completed, but registration submission could not be confirmed. Please contact the organizer and share Payment ID: " +
-          response.razorpay_payment_id,
+          "⚠️ Payment completed (ID: <b>" + response.razorpay_payment_id + "</b>), but server submission failed. Please share this Payment ID with the organizer.",
           false
         );
       }
@@ -456,8 +471,7 @@ form.addEventListener("submit", function(event) {
       payButton.disabled = false;
       payButton.textContent = "PROCEED TO PAYMENT – ₹200";
       showMessage(
-        "Payment failed: " +
-        (response.error.description || "Please try again."),
+        "Payment failed: " + (response.error.description || "Please try again."),
         false
       );
     });
@@ -466,7 +480,7 @@ form.addEventListener("submit", function(event) {
   } catch (error) {
     payButton.disabled = false;
     payButton.textContent = "PROCEED TO PAYMENT – ₹200";
-    showMessage("Unable to open payment. Please try again.", false);
+    showMessage("Unable to open payment gateway. Please try again.", false);
   }
 });
 </script>
