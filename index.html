@@ -1,489 +1,382 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avinashi Vetri Marathon 2026</title>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<style>
-:root {
-  --green:#164b35;
-  --lime:#c8f169;
-  --dark:#101b17;
-  --cream:#f5f4eb;
-  --orange:#ff8b42;
-}
-* {box-sizing:border-box;margin:0;padding:0}
-body {
-  font-family:Arial,sans-serif;
-  background:var(--cream);
-  color:var(--dark);
-  line-height:1.6;
-}
-header {
-  background:var(--dark);
-  color:white;
-  padding:18px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-}
-.logo {font-weight:900;font-size:18px;letter-spacing:1px}
-nav a {
-  color:white;text-decoration:none;margin-left:18px;
-  font-size:14px;font-weight:bold;
-}
-.hero {
-  min-height:570px;
-  background:linear-gradient(120deg,rgba(8,30,20,.94),rgba(16,65,42,.76)),
-  url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=1800&q=85') center/cover;
-  color:white;padding:90px 7%;
-  display:flex;align-items:center;
-}
-.hero-content {max-width:760px}
-.tag {
-  display:inline-block;background:var(--lime);color:#14251a;
-  padding:7px 15px;border-radius:30px;font-weight:bold;
-  font-size:12px;letter-spacing:1px;margin-bottom:20px;
-}
-h1 {font-size:clamp(40px,7vw,76px);line-height:1.02;margin-bottom:20px}
-.hero p {font-size:18px;max-width:600px;color:#e8f0e9}
-.hero-buttons {display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.btn {
-  display:inline-block;border:0;border-radius:8px;padding:14px 23px;
-  font-weight:bold;font-size:15px;cursor:pointer;text-decoration:none;
-}
-.btn-green {background:var(--lime);color:#14251a}
-.btn-outline {border:1px solid white;color:white;background:transparent}
-section {padding:70px 7%}
-.section-title {font-size:34px;color:var(--green);margin-bottom:12px}
-.section-intro {color:#637068;margin-bottom:30px}
-.info-grid,.category-grid {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:18px;margin-top:28px;
-}
-.info-card {
-  background:white;padding:25px;border-radius:14px;
-  border:1px solid #e3e6dc;
-}
-.info-card h3 {color:var(--green);margin-bottom:8px}
-.info-card .big {font-size:25px;font-weight:900;color:var(--orange)}
-.categories {background:#e9eddf}
-.category {
-  background:white;border-radius:13px;padding:22px;
-  border-left:5px solid var(--green);
-}
-.category h3 {color:var(--green)}
-.category p {color:#68746b;font-size:14px}
-.category strong {display:block;margin-top:9px}
-.register-section {background:var(--dark);color:white}
-.register-section .section-title {color:var(--lime)}
-.form-wrap {
-  max-width:850px;margin:auto;background:white;color:var(--dark);
-  padding:30px;border-radius:18px;
-}
-.form-grid {
-  display:grid;grid-template-columns:1fr 1fr;gap:17px;
-}
-.field {display:flex;flex-direction:column;gap:6px}
-.field.full {grid-column:1/-1}
-label {font-weight:bold;font-size:13px}
-input,select,textarea {
-  width:100%;padding:13px;border:1px solid #d5dbd3;
-  border-radius:7px;font-size:15px;background:#fff;
-}
-textarea {min-height:85px;resize:vertical}
-.payment-note {
-  margin:22px 0;background:#eff5e8;padding:17px;border-radius:10px;
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-}
-.payment-note strong {font-size:24px;color:var(--green)}
-.pay-btn {
-  width:100%;background:var(--green);color:white;
-  padding:17px;border:0;border-radius:9px;font-size:17px;
-  font-weight:bold;cursor:pointer;
-}
-.pay-btn:disabled {opacity:.6;cursor:wait}
-.small-note {font-size:12px;color:#69736d;margin-top:12px}
-#message {
-  display:none;margin-top:18px;padding:15px;border-radius:9px;
-  background:#edf5e8;color:#17452f;font-weight:bold;
-  overflow-wrap:anywhere;
-}
-footer {
-  background:#0b1510;color:#d7e0d8;text-align:center;padding:30px 6%;
-}
-footer strong {color:var(--lime)}
-@media(max-width:650px) {
-  header {justify-content:center;text-align:center}
-  nav a {margin:0 7px}
-  .hero {padding:65px 6%;min-height:510px}
-  section {padding:52px 6%}
-  .form-grid {grid-template-columns:1fr}
-  .field.full {grid-column:auto}
-  .form-wrap {padding:20px}
-  .payment-note {align-items:flex-start;flex-direction:column}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avinashi Vetri Marathon 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        .tvk-red { background-color: #D32F2F; }
+        .tvk-yellow { background-color: #FFC107; }
+        .text-tvk-red { color: #D32F2F; }
+        .text-tvk-yellow { color: #E65100; }
+    </style>
 </head>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="tvk-red text-white p-2 rounded-lg font-bold text-xl tracking-wider">TVK</div>
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-gray-500 block">Tamizhaga Vetri Kazhagam</span>
+                        <h1 class="text-lg font-bold text-tvk-red">Vetri Marathon 2026</h1>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <button onclick="showPage('homePage')" class="font-semibold text-gray-700 hover:text-red-600 transition">Home</button>
+                    <button onclick="showPage('locationPage')" class="font-semibold text-gray-700 hover:text-red-600 transition">Location</button>
+                    <button onclick="showPage('registrationPage')" class="tvk-red text-white px-5 py-2 rounded-full font-bold shadow hover:bg-red-700 transition">Register Now (₹200)</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-gray-700 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 pt-2 pb-4 space-y-2">
+            <button onclick="showPage('homePage'); toggleMobileMenu();" class="block w-full text-left py-2 font-semibold text-gray-700">Home</button>
+            <button onclick="showPage('locationPage'); toggleMobileMenu();" class="block w-full text-left py-2 font-semibold text-gray-700">Location</button>
+            <button onclick="showPage('registrationPage'); toggleMobileMenu();" class="block w-full text-left py-2 font-semibold text-tvk-red">Register Now (₹200)</button>
+        </div>
+    </nav>
 
-<header>
-  <div class="logo">VETRI MARATHON 2026</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#event">Event</a>
-    <a href="#categories">Categories</a>
-    <a href="#register">Register</a>
-  </nav>
-</header>
-
-<main>
-<section class="hero" id="home">
-  <div class="hero-content">
-    <span class="tag">RUN FOR A BETTER TOMORROW</span>
-    <h1>AVINASHI<br>VETRI MARATHON</h1>
-    <p>A Drug-Free Tamil Nadu. A Greener Tamil Nadu.</p>
-    <p style="margin-top:15px"><strong>29 NOVEMBER 2026</strong><br>
-    AKN School, Nathampalayam Bypass, Avinashi</p>
-    <div class="hero-buttons">
-      <a class="btn btn-green" href="#register">REGISTER NOW – ₹200</a>
-      <a class="btn btn-outline" href="#categories">VIEW CATEGORIES</a>
-    </div>
-  </div>
-</section>
-
-<section id="event">
-  <h2 class="section-title">Run With A Purpose</h2>
-  <p class="section-intro">
-    Join us for a community marathon promoting a drug-free
-    and greener Tamil Nadu. Every step makes a difference.
-  </p>
-  <div class="info-grid">
-    <div class="info-card">
-      <h3>Event Date</h3>
-      <div class="big">29 NOV</div>
-      <p>Sunday, 2026</p>
-    </div>
-    <div class="info-card">
-      <h3>Venue</h3>
-      <p>AKN School, Nathampalayam Bypass, Avinashi</p>
-    </div>
-    <div class="info-card">
-      <h3>Cash Prize</h3>
-      <div class="big">₹1 LAKH</div>
-      <p>Total cash prize pool</p>
-    </div>
-    <div class="info-card">
-      <h3>Registration</h3>
-      <div class="big">₹200</div>
-      <p>All categories</p>
-    </div>
-  </div>
-</section>
-
-<section class="categories" id="categories">
-  <h2 class="section-title">Race Categories</h2>
-  <p class="section-intro">Choose your category and get ready to run.</p>
-  <div class="category-grid">
-    <div class="category">
-      <h3>Below 9 Years</h3>
-      <p>1.5 KM Run</p>
-      <strong>Registration ₹200</strong>
-    </div>
-    <div class="category">
-      <h3>Below 12 Years</h3>
-      <p>3 KM Run</p>
-      <strong>Registration ₹200</strong>
-    </div>
-    <div class="category">
-      <h3>Below 16 Years</h3>
-      <p>4 KM Run</p>
-      <strong>Registration ₹200</strong>
-    </div>
-    <div class="category">
-      <h3>Above 16 Years</h3>
-      <p>10 KM Run</p>
-      <strong>Registration ₹200</strong>
-    </div>
-  </div>
-</section>
-
-<section class="register-section" id="register">
-  <h2 class="section-title">Register For The Marathon</h2>
-  <p class="section-intro" style="color:#d1ddd4">
-    Fill in your details carefully. Complete the ₹200 payment to submit your registration.
-  </p>
-
-  <div class="form-wrap">
-    <form id="registrationForm">
-      <div class="form-grid">
-
-        <div class="field">
-          <label for="name">Full Name *</label>
-          <input id="name" name="name" required maxlength="100"
-                 placeholder="Enter participant name">
+    <!-- ==================== HOME PAGE ==================== -->
+    <div id="homePage" class="page-section">
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-red-600 to-orange-500 text-white py-16 px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <p class="text-sm uppercase tracking-widest bg-yellow-400 text-black inline-block px-3 py-1 rounded-full font-bold mb-4">Organized by Avinashi North-West Union[span_0](start_span)[span_0](end_span)</p>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-wide">Avinashi Vetri Marathon 2026[span_1](start_span)[span_1](end_span)</h1>
+                <p class="text-lg md:text-2xl italic mb-6 text-yellow-200">"A Drug-Free Tamilnadu • A Greener Tamilnadu[span_2](start_span)"[span_2](end_span)</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="showPage('registrationPage')" class="bg-yellow-400 text-gray-900 font-extrabold px-8 py-3 rounded-full shadow-lg text-lg hover:bg-yellow-300 transition transform hover:scale-105">
+                        <i class="fa-solid fa-running mr-2"></i> Register Now (₹200)
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="field">
-          <label for="dob">Date of Birth *</label>
-          <input id="dob" name="dob" type="date" required>
+        <!-- Event Highlights & Cash Prize -->
+        <div class="max-w-6xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-600 text-center">
+                    <i class="fa-solid fa-calendar-days text-3xl text-tvk-red mb-3"></i>
+                    <h3 class="font-bold text-gray-600 text-sm">Date</h3>
+                    <p class="text-xl font-extrabold text-gray-900">November 29, 2026[span_3](start_span)[span_3](end_span)</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500 text-center">
+                    <i class="fa-solid fa-trophy text-3xl text-yellow-500 mb-3"></i>
+                    <h3 class="font-bold text-gray-600 text-sm">Total Cash Prize</h3>
+                    <p class="text-2xl font-extrabold text-tvk-red">₹1,00,000[span_4](start_span)[span_4](end_span)</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-600 text-center">
+                    <i class="fa-solid fa-location-dot text-3xl text-tvk-red mb-3"></i>
+                    <h3 class="font-bold text-gray-600 text-sm">Venue</h3>
+                    <p class="text-md font-extrabold text-gray-900">AKN School, Nathampalayam, By-pass, Avinashi[span_5](start_span)[span_5](end_span)</p>
+                </div>
+            </div>
+
+            <!-- Race Categories -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-8"><i class="fa-solid fa-medal text-yellow-500 mr-2"></i> Race Categories</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                        <span class="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Kids</span>
+                        <h3 class="text-lg font-bold mt-3 text-gray-800">Below 9 Years[span_6](start_span)[span_6](end_span)</h3>
+                        <p class="text-2xl font-extrabold text-tvk-red mt-1">1.5 KM[span_7](start_span)[span_7](end_span)</p>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center">
+                        <span class="bg-yellow-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Kids</span>
+                        <h3 class="text-lg font-bold mt-3 text-gray-800">Below 12 Years[span_8](start_span)[span_8](end_span)</h3>
+                        <p class="text-2xl font-extrabold text-yellow-600 mt-1">3 KM[span_9](start_span)[span_9](end_span)</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                        <span class="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Youth</span>
+                        <h3 class="text-lg font-bold mt-3 text-gray-800">Below 16 Years[span_10](start_span)[span_10](end_span)</h3>
+                        <p class="text-2xl font-extrabold text-tvk-red mt-1">4 KM[span_11](start_span)[span_11](end_span)</p>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center">
+                        <span class="bg-yellow-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">Open</span>
+                        <h3 class="text-lg font-bold mt-3 text-gray-800">Above 16 Years[span_12](start_span)[span_12](end_span)</h3>
+                        <p class="text-2xl font-extrabold text-yellow-600 mt-1">10 KM[span_13](start_span)[span_13](end_span)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perks Section -->
+            <div class="bg-gray-900 text-white rounded-2xl p-8 text-center">
+                <h3 class="text-xl font-bold mb-6">Participants Will Get[span_14](start_span)[span_14](end_span)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-shirt text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">T-Shirt[span_15](start_span)[span_15](end_span)</p></div>
+                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-award text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">Medal[span_16](start_span)[span_16](end_span)</p></div>
+                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-file-lines text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">Certificate[span_17](start_span)[span_17](end_span)</p></div>
+                    <div class="bg-gray-800 p-4 rounded-lg"><i class="fa-solid fa-glass-water text-yellow-400 text-2xl mb-2"></i><p class="font-semibold">Refreshments[span_18](start_span)[span_18](end_span)</p></div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="field">
-          <label for="gender">Gender *</label>
-          <select id="gender" name="gender" required>
-            <option value="">Select Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
+    <!-- ==================== LOCATION PAGE ==================== -->
+    <div id="locationPage" class="page-section hidden max-w-5xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-center text-tvk-red mb-6"><i class="fa-solid fa-map-location-dot mr-2"></i> Event Location</h2>
+            <div class="bg-red-50 border-l-4 border-red-600 p-4 mb-6 rounded-r-lg">
+                <p class="font-bold text-gray-800 text-lg">AKN School, Nathampalayam, By-pass, Avinashi[span_19](start_span)[span_19](end_span)</p>
+                <p class="text-gray-600 text-sm mt-1">The marathon will start on November 29, 2026 at the scheduled time[span_20](start_span)[span_20](end_span).</p>
+            </div>
+            <!-- Google Maps Embed Placeholder -->
+            <div class="w-full h-96 bg-gray-200 rounded-xl overflow-hidden shadow-inner flex items-center justify-center">
+                <iframe class="w-full h-full border-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.2891!2d77.27!3d11.20!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDEyJzAwLjAiTiA3N8KwMTYnMTIuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="mt-6 text-center">
+                <p class="font-semibold text-gray-700">Contact: 8675739507, 9790682415, 9597735733[span_21](start_span)[span_21](end_span)</p>
+            </div>
         </div>
+    </div>
 
-        <div class="field">
-          <label for="category">Race Category *</label>
-          <select id="category" name="category" required>
-            <option value="">Select Category</option>
-            <option value="Below 9 Years - 1.5 KM">Below 9 Years - 1.5 KM</option>
-            <option value="Below 12 Years - 3 KM">Below 12 Years - 3 KM</option>
-            <option value="Below 16 Years - 4 KM">Below 16 Years - 4 KM</option>
-            <option value="Above 16 Years - 10 KM">Above 16 Years - 10 KM</option>
-          </select>
+    <!-- ==================== REGISTRATION PAGE ==================== -->
+    <div id="registrationPage" class="page-section hidden max-w-3xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-2xl shadow-xl p-8 border-t-8 border-red-600">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-extrabold text-gray-900">Marathon Registration Form</h2>
+                <p class="text-gray-600 text-sm mt-1">Fill in the details and complete the payment of ₹200[span_22](start_span)[span_22](end_span)</p>
+            </div>
+
+            <form id="marathonForm" onsubmit="handleRegistration(event)" class="space-y-6">
+                <!-- Name -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" id="fullName" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Enter your full name">
+                </div>
+
+                <!-- Email & Mobile -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Email ID *</label>
+                        <input type="email" id="email" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="example@gmail.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Mobile / WhatsApp Number *</label>
+                        <input type="tel" id="mobile" pattern="[0-9]{10}" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="10-digit mobile number">
+                    </div>
+                </div>
+
+                <!-- DOB & Gender -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Date of Birth *</label>
+                        <input type="date" id="dob" required onchange="calculateCategory()" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Gender *</label>
+                        <select id="gender" required onchange="calculateCategory()" class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Auto-Calculated Category & Fee -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-red-50 p-4 rounded-xl border border-red-200">
+                    <div>
+                        <label class="block text-xs font-bold text-red-700 uppercase">Auto Category</label>
+                        <input type="text" id="category" readonly class="w-full bg-transparent font-extrabold text-gray-800 text-lg border-none focus:outline-none mt-1" value="Select DOB & Gender">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-red-700 uppercase">Entry Fee</label>
+                        <input type="text" id="amount" readonly class="w-full bg-transparent font-extrabold text-tvk-red text-xl border-none focus:outline-none mt-1" value="₹200">
+                    </div>
+                </div>
+
+                <!-- T-Shirt Size -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">T-Shirt Size *</label>
+                    <select id="tshirtSize" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+                        <option value="">-- Select T-Shirt Size --</option>
+                        <option value="24">24</option>
+                        <option value="26">26</option>
+                        <option value="28">28</option>
+                        <option value="30">30</option>
+                        <option value="32">32</option>
+                        <option value="34">34</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="XXXL">XXXL</option>
+                    </select>
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Address *</label>
+                    <textarea id="address" rows="3" required class="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none" placeholder="Enter your full address"></textarea>
+                </div>
+
+                <!-- Submit & Pay Button -->
+                <button type="submit" class="w-full tvk-red text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-red-700 transition transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-credit-card mr-2"></i> Pay ₹200 & Complete Registration
+                </button>
+            </form>
         </div>
+    </div>
 
-        <div class="field">
-          <label for="phone">Mobile Number *</label>
-          <input id="phone" name="phone" type="tel"
-                 inputmode="numeric" pattern="[0-9]{10}"
-                 maxlength="10" required placeholder="10-digit mobile number">
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 text-center shadow-2xl">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Registration Successful!</h3>
+            <p class="text-gray-600 text-sm mb-4">Your marathon registration has been successfully completed.</p>
+            <div class="bg-gray-50 p-4 rounded-xl text-left mb-6 space-y-2 text-sm border">
+                <p><strong>Name:</strong> <span id="resName"></span></p>
+                <p><strong>Category:</strong> <span id="resCategory"></span></p>
+                <p><strong>Transaction ID:</strong> <span id="resTxnId"></span></p>
+            </div>
+            <button onclick="location.reload()" class="w-full bg-gray-900 text-white py-3 rounded-xl font-bold hover:bg-gray-800 transition">Go to Home Page</button>
         </div>
+    </div>
 
-        <div class="field">
-          <label for="email">Email Address *</label>
-          <input id="email" name="email" type="email" required
-                 placeholder="Enter email address">
-        </div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center py-6 mt-12">
+        <p class="text-sm">© 2026 Avinashi Vetri Marathon | Tamizhaga Vetri Kazhagam[span_23](start_span)[span_23](end_span)</p>
+    </footer>
 
-        <div class="field full">
-          <label for="address">Full Address *</label>
-          <textarea id="address" name="address" required
-                    placeholder="Enter your address"></textarea>
-        </div>
+    <!-- JavaScript Logic -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
 
-        <div class="field">
-          <label for="tshirt">T-shirt Size *</label>
-          <select id="tshirt" name="tshirt" required>
-            <option value="">Select T-shirt Size</option>
-            <option>XS</option>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-            <option>XXL</option>
-            <option>XXXL</option>
-          </select>
-        </div>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
 
-      </div>
+        // Auto Calculate Age & Category based on Marathon Date: Nov 29, 2026
+        function calculateCategory() {
+            const dobVal = document.getElementById('dob').value;
+            const genderVal = document.getElementById('gender').value;
+            
+            if (!dobVal || !genderVal) {
+                document.getElementById('category').value = "Select DOB & Gender";
+                return;
+            }
 
-      <div class="payment-note">
-        <div>
-          <b>Registration Fee</b>
-          <p>All race categories</p>
-        </div>
-        <strong>₹200</strong>
-      </div>
+            const dobDate = new Date(dobVal);
+            const marathonDate = new Date('2026-11-29'); // Marathon Date[span_24](start_span)[span_24](end_span)
+            
+            let age = marathonDate.getFullYear() - dobDate.getFullYear();
+            const m = marathonDate.getMonth() - dobDate.getMonth();
+            if (m < 0 || (m === 0 && marathonDate.getDate() < dobDate.getDate())) {
+                age--;
+            }
 
-      <button type="submit" class="pay-btn" id="payButton">
-        PROCEED TO PAYMENT – ₹200
-      </button>
-      <p class="small-note">
-        Your registration details will be submitted after the payment step.
-        Please do not close the page while submission is in progress.
-      </p>
-      <div id="message" role="status"></div>
-    </form>
-  </div>
-</section>
-</main>
+            let catText = "";
+            if (age < 9) {
+                catText = "Below 9 Years - 1.5 KM";
+            } else if (age < 12) {
+                catText = "Below 12 Years - 3 KM";
+            } else if (age < 16) {
+                catText = "Below 16 Years - 4 KM";
+            } else {
+                catText = "Above 16 Years - 10 KM";
+            }
 
-<footer>
-  <p><strong>AVINASHI VETRI MARATHON 2026</strong></p>
-  <p>A Drug-Free Tamil Nadu. A Greener Tamil Nadu.</p>
-  <p>29 November 2026 | Avinashi, Tiruppur</p>
-  <p style="margin-top:12px;font-size:12px">
-    Organized by TVK Avinashi North-West Union<br>
-    Supported by Pasumai Ingarangal
-  </p>
-</footer>
+            catText += ` (${genderVal})`;
+            document.getElementById('category').value = catText;
+        }
 
-<script>
-const RAZORPAY_KEY_ID = "rzp_live_U0jUvuUKBpqJ7r";
+        // Handle Registration & Razorpay Payment
+        function handleRegistration(event) {
+            event.preventDefault();
 
-const APPS_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbx7QBvWyXedPcS1xXsWqizgnFS4QnGQ9yFnVDupbPMIEHNIq8toHlBX5L22oaQ60ORv/exec";
+            const fullName = document.getElementById('fullName').value;
+            const email =document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            const dob = document.getElementById('dob').value;
+            const gender = document.getElementById('gender').value;
+            const category = document.getElementById('category').value;
+            const tshirtSize = document.getElementById('tshirtSize').value;
+            const address = document.getElementById('address').value;
+            const amount = 200;
 
-const form = document.getElementById("registrationForm");
-const payButton = document.getElementById("payButton");
-const messageBox = document.getElementById("message");
+            var options = {
+                "key": "rzp_live_U0jUvuUKBpqJ7r",
+                "amount": amount * 100, // Amount in paise
+                "currency": "INR",
+                "name": "Vetri Marathon 2026",
+                "description": "Registration Fee for " + category,
+                "handler": function (response){
+                    const paymentId = response.razorpay_payment_id;
 
-function showMessage(message, success) {
-  messageBox.style.display = "block";
-  messageBox.innerHTML = message;
-  messageBox.style.background = success ? "#edf5e8" : "#fff0ed";
-  messageBox.style.color = success ? "#17452f" : "#9b291c";
-}
+                    const payload = {
+                        name: fullName,
+                        phone: mobile,
+                        payment_id: paymentId,
+                        dob: dob,
+                        gender: gender,
+                        category: category,
+                        address: address,
+                        tshirt: tshirtSize,
+                        amount: amount,
+                        email: email
+                    };
 
-function getFormData() {
-  return {
-    name: document.getElementById("name").value.trim(),
-    dob: document.getElementById("dob").value,
-    gender: document.getElementById("gender").value,
-    category: document.getElementById("category").value,
-    phone: document.getElementById("phone").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    address: document.getElementById("address").value.trim(),
-    tshirt: document.getElementById("tshirt").value,
-    amount: 200
-  };
-}
+                    submitToGoogleSheets(payload);
+                },
+                "prefill": {
+                    "name": fullName,
+                    "email": email,
+                    "contact": mobile
+                },
+                "theme": {
+                    "color": "#D32F2F"
+                }
+            };
+            
+            var rzp = new Razorpay(options);
+            rzp.open();
+        }
 
-// Age Category Validation based on Event Date: 2026-11-29
-function validateAgeCategory(dobString, categoryString) {
-  const eventDate = new Date("2026-11-29");
-  const birthDate = new Date(dobString);
-  
-  let age = eventDate.getFullYear() - birthDate.getFullYear();
-  const m = eventDate.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && eventDate.getDate() < birthDate.getDate())) {
-    age--;
-  }
+        // Send Data to Google Apps Script Endpoint
+        function submitToGoogleSheets(data) {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx7QBvWyXedPcS1xXsWqizgnFS4QnGQ9yFnVDupbPMIEHNIq8toHlBX5L22oaQ60ORv/exec';
 
-  if (categoryString.includes("Below 9") && age >= 9) return "Selected 'Below 9 Years' category, but the participant's age will be " + age + " on event day.";
-  if (categoryString.includes("Below 12") && age >= 12) return "Selected 'Below 12 Years' category, but the participant's age will be " + age + " on event day.";
-  if (categoryString.includes("Below 16") && age >= 16) return "Selected 'Below 16 Years' category, but the participant's age will be " + age + " on event day.";
-  if (categoryString.includes("Above 16") && age < 16) return "Selected 'Above 16 Years' category, but the participant's age will be " + age + " on event day.";
-  
-  return null; // Valid
-}
-
-function submitRegistration(data, paymentId) {
-  const payload = {
-    ...data,
-    payment_id: paymentId
-  };
-
-  return fetch(APPS_SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify(payload)
-  });
-}
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  if (!form.reportValidity()) return;
-
-  const data = getFormData();
-
-  if (!/^[0-9]{10}$/.test(data.phone)) {
-    showMessage("Please enter a valid 10-digit mobile number.", false);
-    return;
-  }
-
-  // Verify Age matches category
-  const ageError = validateAgeCategory(data.dob, data.category);
-  if (ageError) {
-    showMessage(ageError, false);
-    return;
-  }
-
-  payButton.disabled = true;
-  payButton.textContent = "OPENING PAYMENT...";
-
-  const options = {
-    key: RAZORPAY_KEY_ID,
-    amount: 20000,
-    currency: "INR",
-    name: "Avinashi Vetri Marathon 2026",
-    description: "Marathon Registration Fee",
-    prefill: {
-      name: data.name,
-      email: data.email,
-      contact: data.phone
-    },
-    notes: {
-      participant_name: data.name,
-      category: data.category,
-      tshirt_size: data.tshirt
-    },
-    theme: {
-      color: "#164b35"
-    },
-    handler: async function(response) {
-      showMessage(
-        "Payment successful! Submitting your details to the database...",
-        true
-      );
-
-      try {
-        await submitRegistration(data, response.razorpay_payment_id);
-
-        // Display Payment ID clearly to user so they have proof
-        showMessage(
-          "✅ <b>Registration Successful!</b><br>" +
-          "Payment ID: <b>" + response.razorpay_payment_id + "</b><br>" +
-          "Your details have been recorded. Please check your email for confirmation. Keep this Payment ID safe for reference.",
-          true
-        );
-
-        form.reset();
-      } catch (error) {
-        showMessage(
-          "⚠️ Payment completed (ID: <b>" + response.razorpay_payment_id + "</b>), but server submission failed. Please share this Payment ID with the organizer.",
-          false
-        );
-      }
-
-      payButton.disabled = false;
-      payButton.textContent = "PROCEED TO PAYMENT – ₹200";
-    },
-    modal: {
-      ondismiss: function() {
-        payButton.disabled = false;
-        payButton.textContent = "PROCEED TO PAYMENT – ₹200";
-        showMessage("Payment window closed. No registration was submitted.", false);
-      }
-    }
-  };
-
-  try {
-    const razorpay = new Razorpay(options);
-
-    razorpay.on("payment.failed", function(response) {
-      payButton.disabled = false;
-      payButton.textContent = "PROCEED TO PAYMENT – ₹200";
-      showMessage(
-        "Payment failed: " + (response.error.description || "Please try again."),
-        false
-      );
-    });
-
-    razorpay.open();
-  } catch (error) {
-    payButton.disabled = false;
-    payButton.textContent = "PROCEED TO PAYMENT – ₹200";
-    showMessage("Unable to open payment gateway. Please try again.", false);
-  }
-});
-</script>
-
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                document.getElementById('resName').innerText = data.name;
+                document.getElementById('resCategory').innerText = data.category;
+                document.getElementById('resTxnId').innerText = data.payment_id;
+                document.getElementById('successModal').classList.remove('hidden');
+            }).catch(error => {
+                console.error('Error!', error);
+                alert('An error occurred while saving the registration. Please contact via WhatsApp.');
+            });
+        }
+    </script>
 </body>
 </html>
